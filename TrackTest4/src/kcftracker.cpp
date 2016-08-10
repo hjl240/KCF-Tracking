@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 Tracker based on Kernelized Correlation Filter (KCF) [1] and Circulant Structure with Kernels (CSK) [2].
 CSK is implemented by using raw gray level features, since it is a single-channel filter.
@@ -177,18 +177,19 @@ cv::Rect KCFTracker::update(cv::Mat image)
     if (_roi.x >= image.cols - 1) _roi.x = image.cols - 2;
     if (_roi.y >= image.rows - 1) _roi.y = image.rows - 2;
 
-    float cx = _roi.x + _roi.width / 2.0f;//���ĵ�
+    float cx = _roi.x + _roi.width / 2.0f;//中心点
     float cy = _roi.y + _roi.height / 2.0f;
 
 
-    float peak_value;
+    float peak_value; 
     cv::Point2f res = detect(_tmpl, getFeatures(image, 0, 1.0f), peak_value);
 
+	//
     if (scale_step != 1) {
         // Test at a smaller _scale
         float new_peak_value;
         cv::Point2f new_res = detect(_tmpl, getFeatures(image, 0, 1.0f / scale_step), new_peak_value);
-
+		//update roi and other parameter 更新roi区域及其参数
         if (scale_weight * new_peak_value > peak_value) {
             res = new_res;
             peak_value = new_peak_value;
@@ -212,7 +213,7 @@ cv::Rect KCFTracker::update(cv::Mat image)
     // Adjust by cell size and _scale
     _roi.x = cx - _roi.width / 2.0f + ((float) res.x * cell_size * _scale);
     _roi.y = cy - _roi.height / 2.0f + ((float) res.y * cell_size * _scale);
-
+	//超出边界的情况
     if (_roi.x >= image.cols - 1) _roi.x = image.cols - 1;
     if (_roi.y >= image.rows - 1) _roi.y = image.rows - 1;
     if (_roi.x + _roi.width <= 0) _roi.x = -_roi.width + 2;

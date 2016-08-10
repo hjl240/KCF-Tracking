@@ -1,8 +1,8 @@
-/*
-ĞŞ¸Ä×ÔKCFcpp£¬¹Ù·½´úÂë
-Ö»Ê¹ÓÃopencv3.1.0£¬²»Ê¹ÓÃopencv_contribute
-×îºóĞŞ¸ÄÊ±¼ä£º2016.7.28
-×÷Õß£ºHJL
+ï»¿/*
+ä¿®æ”¹è‡ªKCFcppï¼Œå®˜æ–¹ä»£ç 
+åªä½¿ç”¨opencv3.1.0ï¼Œä¸ä½¿ç”¨opencv_contribute
+æœ€åä¿®æ”¹æ—¶é—´ï¼š2016.7.28
+ä½œè€…ï¼šHJL
 */
 #include <iostream>
 #include <algorithm>
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 	if (roi.width == 0 || roi.height == 0)
 		return 0;
 
-	printf("x = %f, y = %f, width = %f, height = %f;\n",roi.x,roi.y,roi.width,roi.height);/////Êä³ö³¤¿í  ´ÓÉÏÍùÏÂ¿ò  ´ÓÏÂÍùÉÏ¿ò  Çø±ğ
+	printf("x = %f, y = %f, width = %f, height = %f;\n",roi.x,roi.y,roi.width,roi.height);/////è¾“å‡ºé•¿å®½  ä»ä¸Šå¾€ä¸‹æ¡†  ä»ä¸‹å¾€ä¸Šæ¡†  åŒºåˆ«
 
 	tracker.init(roi, frame);
 	rectangle(frame, roi, Scalar(0, 255, 255), 1, 8);
