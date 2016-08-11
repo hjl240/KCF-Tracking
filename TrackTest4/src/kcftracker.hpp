@@ -135,7 +135,7 @@ protected:
     float subPixelPeak(float left, float center, float right);
 
     cv::Mat _alphaf;
-    cv::Mat _prob;
+    cv::Mat _prob; //fft2(y)
     cv::Mat _tmpl; //提取的特征
     cv::Mat _num;
     cv::Mat _den;
@@ -143,7 +143,7 @@ protected:
 
 private:
     int size_patch[3];
-    cv::Mat hann;
+    cv::Mat hann; //汉宁窗
     cv::Size _tmpl_sz;
     float _scale;
     int _gaussian_size;

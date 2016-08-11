@@ -160,9 +160,6 @@
     <ClInclude Include="src\recttools.hpp" />
     <ClInclude Include="src\tracker.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="Readme.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

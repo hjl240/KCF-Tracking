@@ -162,9 +162,9 @@ void KCFTracker::init(const cv::Rect &roi, cv::Mat image)
 {
     _roi = roi;
     assert(roi.width >= 0 && roi.height >= 0);
-    _tmpl = getFeatures(image, 1);
-    _prob = createGaussianPeak(size_patch[0], size_patch[1]);
-    _alphaf = cv::Mat(size_patch[0], size_patch[1], CV_32FC2, float(0));////??????????
+    _tmpl = getFeatures(image, 1);//只有第一次初始化的时候，第二个形参才为1，对第一帧特征进行汉宁窗平滑
+    _prob = createGaussianPeak(size_patch[0], size_patch[1]);//创建高斯峰，只有第一帧才用到
+    _alphaf = cv::Mat(size_patch[0], size_patch[1], CV_32FC2, float(0));////alphaf初始化
     //_num = cv::Mat(size_patch[0], size_patch[1], CV_32FC2, float(0));
     //_den = cv::Mat(size_patch[0], size_patch[1], CV_32FC2, float(0));
     train(_tmpl, 1.0); // train with initial frame
@@ -182,7 +182,7 @@ cv::Rect KCFTracker::update(cv::Mat image)
 
 
     float peak_value; 
-    cv::Point2f res = detect(_tmpl, getFeatures(image, 0, 1.0f), peak_value);
+    cv::Point2f res = detect(_tmpl, getFeatures(image, 0, 1.0f), peak_value);//获取response的位置
 
 	//
     if (scale_step != 1) {
@@ -210,7 +210,7 @@ cv::Rect KCFTracker::update(cv::Mat image)
         }
     }
 
-    // Adjust by cell size and _scale
+    // Adjust by cell size and _scale ????????????cell size????????????????????
     _roi.x = cx - _roi.width / 2.0f + ((float) res.x * cell_size * _scale);
     _roi.y = cy - _roi.height / 2.0f + ((float) res.y * cell_size * _scale);
 	//超出边界的情况
@@ -221,6 +221,7 @@ cv::Rect KCFTracker::update(cv::Mat image)
 
     assert(_roi.width >= 0 && _roi.height >= 0);
 	
+	//上面得到roi新的位置之后，再重新训练得到相关滤波器
     cv::Mat x = getFeatures(image, 0);//提取新的roi特征
     train(x, interp_factor);//训练得到新的滤波器
 
@@ -237,8 +238,8 @@ cv::Point2f KCFTracker::detect(cv::Mat z, cv::Mat x, float &peak_value)
     cv::Mat res = (real(fftd(complexMultiplication(_alphaf, fftd(k)), true)));
 
     //minMaxLoc only accepts doubles for the peak, and integer points for the coordinates
-    cv::Point2i pi;
-    double pv;
+    cv::Point2i pi;//存放响应response最大值所在的位置
+    double pv;//pv存放响应response最大值
 	//找到输入数组的最大/最小值，此处寻找最大值，pv存放最大值，pi存放最大值所在的位置
     cv::minMaxLoc(res, NULL, &pv, NULL, &pi);
     peak_value = (float) pv;
@@ -257,7 +258,7 @@ cv::Point2f KCFTracker::detect(cv::Mat z, cv::Mat x, float &peak_value)
     p.x -= (res.cols) / 2;
     p.y -= (res.rows) / 2;
 
-    return p;
+    return p; //responses的位置?????????
 }
 
 // train tracker with a single image
@@ -284,7 +285,8 @@ void KCFTracker::train(cv::Mat x, float train_interp_factor)
 
 }
 
-// Evaluates a Gaussian kernel with bandwidth SIGMA for all relative shifts between input images X and Y, which must both be MxN. They must    also be periodic (ie., pre-processed with a cosine window).
+// Evaluates a Gaussian kernel with bandwidth SIGMA for all relative shifts between input images X and Y, 
+// which must both be MxN. They must    also be periodic (ie., pre-processed with a cosine window).
 cv::Mat KCFTracker::gaussianCorrelation(cv::Mat x1, cv::Mat x2)
 {
     using namespace FFTTools;
@@ -349,7 +351,7 @@ cv::Mat KCFTracker::getFeatures(const cv::Mat & image, bool inithann, float scal
     float cx = _roi.x + _roi.width / 2;
     float cy = _roi.y + _roi.height / 2;
 
-    if (inithann) {
+    if (inithann) {//汉宁窗??????
         int padded_w = _roi.width * padding;
         int padded_h = _roi.height * padding;
         
@@ -474,10 +476,10 @@ cv::Mat KCFTracker::getFeatures(const cv::Mat & image, bool inithann, float scal
         size_patch[2] = 1;  
     }
     
-    if (inithann) {
+    if (inithann) {//只有在第一帧的时候才会用到，创建/初始化 汉宁窗
         createHanningMats();
     }
-    FeaturesMap = hann.mul(FeaturesMap);
+    FeaturesMap = hann.mul(FeaturesMap);//特征与汉宁窗相乘，起平滑作用
     return FeaturesMap;
 }
     
