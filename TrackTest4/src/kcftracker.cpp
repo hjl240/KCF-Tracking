@@ -220,8 +220,9 @@ cv::Rect KCFTracker::update(cv::Mat image)
     if (_roi.y + _roi.height <= 0) _roi.y = -_roi.height + 2;
 
     assert(_roi.width >= 0 && _roi.height >= 0);
-    cv::Mat x = getFeatures(image, 0);
-    train(x, interp_factor);
+	
+    cv::Mat x = getFeatures(image, 0);//提取新的roi特征
+    train(x, interp_factor);//训练得到新的滤波器
 
     return _roi;
 }
@@ -238,12 +239,13 @@ cv::Point2f KCFTracker::detect(cv::Mat z, cv::Mat x, float &peak_value)
     //minMaxLoc only accepts doubles for the peak, and integer points for the coordinates
     cv::Point2i pi;
     double pv;
+	//找到输入数组的最大/最小值，此处寻找最大值，pv存放最大值，pi存放最大值所在的位置
     cv::minMaxLoc(res, NULL, &pv, NULL, &pi);
     peak_value = (float) pv;
 
     //subpixel peak estimation, coordinates will be non-integer
     cv::Point2f p((float)pi.x, (float)pi.y);
-
+	//????????????????????
     if (pi.x > 0 && pi.x < res.cols-1) {
         p.x += subPixelPeak(res.at<float>(pi.y, pi.x-1), peak_value, res.at<float>(pi.y, pi.x+1));
     }

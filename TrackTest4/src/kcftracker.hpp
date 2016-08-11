@@ -1,4 +1,4 @@
-/*
+﻿/*
 
 Tracker based on Kernelized Correlation Filter (KCF) [1] and Circulant Structure with Kernels (CSK) [2].
 CSK is implemented by using raw gray level features, since it is a single-channel filter.
@@ -136,7 +136,7 @@ protected:
 
     cv::Mat _alphaf;
     cv::Mat _prob;
-    cv::Mat _tmpl;
+    cv::Mat _tmpl; //提取的特征
     cv::Mat _num;
     cv::Mat _den;
     cv::Mat _labCentroids;
