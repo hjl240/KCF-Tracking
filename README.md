@@ -19,8 +19,7 @@ VC++目录-->包含目录，添加：
 -   注：（src是KCFcpp中的一个文件夹，需要添加进包含目录）
 
 VC++目录-->库目录，添加：
--   D:\opencv3\opencv\mybuild\install\x86\vc12\lib
--   D:\opencv3\opencv\mybuild\install\x86\vc12\staticlib
+-   D:\opencv\opencv310\build\x64\vc14\lib
 
 链接器-->输入-->附加依赖项
 -   添加相应的.lib文件
