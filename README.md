@@ -1,7 +1,7 @@
-# TrackTest4
+ï»¿# TrackTest4
 
 
-ĞŞ¸Ä×ÔKCFcpp£¬¹Ù·½´úÂë
-Ö»Ê¹ÓÃopencv3.1.0£¬²»Ê¹ÓÃopencv_contribute
-×îºóĞŞ¸ÄÊ±¼ä£º2016.8.12
-×÷Õß£ºHJL
+ä¿®æ”¹è‡ªKCFcppï¼Œå®˜æ–¹ä»£ç 
+åªä½¿ç”¨opencv3.1.0ï¼Œä¸ä½¿ç”¨opencv_contribute
+æœ€åä¿®æ”¹æ—¶é—´ï¼š2016.8.12
+ä½œè€…ï¼šHJL
