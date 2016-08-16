@@ -6,7 +6,6 @@
 -   修改自KCFcpp，KCFcpp源码下载地址：https://github.com/joaofaro/KCFcpp
 -   测试环境：Win7 64位 + Visual Studio 2015 + opencv3.1.0
 -   只使用opencv3.1.0，不使用opencv_contribute
--   最后修改时间：2016.8.12
 -   作者：HJL
 
 环境配置
