@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 	if (roi.width == 0 || roi.height == 0)
 		return 0;
 
-	printf("x = %f, y = %f, width = %f, height = %f;\n",roi.x,roi.y,roi.width,roi.height);/////输出长宽  从上往下框  从下往上框  区别
+	//printf("x = %f, y = %f, width = %f, height = %f;\n",roi.x,roi.y,roi.width,roi.height);/////输出长宽  从上往下框  从下往上框  区别
 
 	tracker.init(roi, frame);
 	rectangle(frame, roi, Scalar(0, 255, 255), 1, 8);

@@ -74,7 +74,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\CODE\VS2015\TrackTest\TrackTest4\TrackTest4\src;D:\opencv\opencv310\build\include\opencv2;D:\opencv\opencv310\build\include\opencv;D:\opencv\opencv310\build\include;$(IncludePath)</IncludePath>
+    <IncludePath>.\src;D:\opencv\opencv310\build\include\opencv2;D:\opencv\opencv310\build\include\opencv;D:\opencv\opencv310\build\include;$(IncludePath)</IncludePath>
     <LibraryPath>D:\opencv\opencv310\build\x64\vc14\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

@@ -15,7 +15,7 @@ VC++目录-->包含目录，添加：
 -   D:\opencv\opencv310\build\include
 -   D:\opencv\opencv310\build\include\opencv
 -   D:\opencv\opencv310\build\include\opencv2
--   E:\CODE\VS2015\TrackTest\TrackTest4\TrackTest4\src
+-   .\src
 -   注：（src是KCFcpp中的一个文件夹，需要添加进包含目录）
 
 VC++目录-->库目录，添加：
